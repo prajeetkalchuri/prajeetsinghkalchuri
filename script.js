@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         resume: () => {
             const link = document.createElement("a");
-            link.href = "/Resume.pdf";
+            link.href = "Resume.pdf";
             link.download = "Resume.pdf";
             document.body.appendChild(link);
             link.click();
