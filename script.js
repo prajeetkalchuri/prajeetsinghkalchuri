@@ -12,10 +12,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const welcomeMessage = `
     <div class="welcome">
     <span class="prompt">λ</span> whoami<br>
-    <b>Your Name</b> — Full-Stack Developer & Software Engineer based in <span class="highlight">Your Location</span>.<br><br>
-    I specialize in building scalable web backends, responsive interfaces, and automated developer tools.
-    I have <span class="highlight">X+ years of experience</span> delivering production-ready software solutions.<br><br>
-    <b>Available for freelance & full-time roles</b> — type <b>hire</b> to get in touch.<br><br>
+    <b>Prajeet Singh</b> — Software Engineer based in <span class="highlight">Gurugram, India</span>.<br><br>
+    I specialize in enterprise backend engineering, SQL Server optimization, and ASP.NET MVC applications.
+    I have <span class="highlight">3+ years of experience</span> building and supporting production supply-chain software.<br><br>
+    <b>Open to new opportunities</b> — type <b>hire</b> to get in touch.<br><br>
     Type <b>help</b> to explore available terminal commands.
     </div>
     `;
@@ -49,78 +49,79 @@ document.addEventListener("DOMContentLoaded", function () {
         neofetch: () => {
             let currentTime = new Date().toLocaleTimeString();
             return `<pre>
-        <span class="blue">      /\\      </span>  User: yourname
-        <span class="blue">     /  \\     </span>  Role: Full-Stack Developer
-        <span class="blue">    /    \\    </span>  Location: Your Location
+        <span class="blue">      /\\      </span>  User: prajeetsingh
+        <span class="blue">     /  \\     </span>  Role: Advanced Application Engineering Senior Analyst
+        <span class="blue">    /    \\    </span>  Location: Gurugram, India
         <span class="blue">   /  /\\  \\   </span>  Time: ${currentTime}
-        <span class="blue">  /  (--)  \\  </span>  Email: <a href="mailto:your.email@example.com" class="custom-link">your.email@example.com</a>
-        <span class="blue"> /  /    \\  \\ </span>  GitHub: <a href="https://github.com/yourusername" target="_blank" class="custom-link">github.com/yourusername</a>
-        <span class="blue">/___\\    /___\\</span>  LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank" class="custom-link">linkedin.com/in/yourusername</a>
+        <span class="blue">  /  (--)  \\  </span>  Email: <a href="mailto:prajeetsinghkalchuri@gmail.com" class="custom-link">prajeetsinghkalchuri@gmail.com</a>
+        <span class="blue"> /  /    \\  \\ </span>  GitHub: <a href="https://github.com/prajeetkalchuri" target="_blank" class="custom-link">github.com/prajeetkalchuri</a>
+        <span class="blue">/___\\    /___\\</span>  LinkedIn: <a href="https://linkedin.com/in/prajeetsinghkalchuri" target="_blank" class="custom-link">linkedin.com/in/prajeetsinghkalchuri</a>
         </pre>`;
         },
 
-        whoami: `<b>Your Name</b> — Software Engineer passionate about full-stack web development, API design, and system reliability.`,
+        whoami: `<b>Prajeet Singh</b> — Advanced Application Engineering Senior Analyst at Accenture, working on enterprise Supply Chain Management applications. Passionate about backend engineering, SQL optimization, and applying AI/ML (RAG, LLMs) to real production workflows.`,
 
         experience: `
         <b>💼 Professional Experience:</b><br><br>
-        • <b>Software Engineer @ Company Name</b> (2023 – Present)<br>
-          - Engineered scalable RESTful services using Node.js & PostgreSQL.<br>
-          - Optimized database queries, reducing response times by 30%.<br><br>
-        • <b>Frontend Developer Intern @ Startup Name</b> (2022 – 2023)<br>
-          - Built responsive UI components with React & TypeScript.<br>
+        • <b>Advanced Application Engineering Senior Analyst @ Accenture</b> (06/2025 – Present)<br>
+          - Own end-to-end development and production support of business-critical Supply Chain Management applications for a large Indian FMCG organization.<br>
+          - Led migration of 2 enterprise SCM applications from Mendix low-code to ASP.NET MVC, delivered to production on schedule with zero post-release critical defects.<br>
+          - Drove adoption of scalable architectural patterns in C#, ASP.NET MVC, SQL Server, and REST APIs.<br><br>
+        • <b>Advanced Application Engineering Analyst @ Accenture</b> (08/2022 – 06/2025)<br>
+          - Delivered 20+ end-to-end business features on C#, ASP.NET MVC, JavaScript, and SQL Server.<br>
+          - Optimized 100+ SQL Server objects, cutting average query execution time by up to 40%.<br>
+          - Automated 10+ business workflows, reducing manual processing effort by 50%.<br>
         `,
 
         skills: `
         <b>Core Stack:</b><br>
-        • <b>Languages:</b> JavaScript, TypeScript, Python, SQL, HTML/CSS<br>
-        • <b>Backend:</b> Node.js, Express, Next.js, FastAPI<br>
-        • <b>Frontend:</b> React, Tailwind CSS, HTML5/CSS3<br>
-        • <b>Databases:</b> PostgreSQL, MongoDB, Redis<br>
-        • <b>DevOps & Tools:</b> Git, Docker, Linux, AWS, Postman<br>
+        • <b>Languages:</b> C#, SQL, JavaScript, Python<br>
+        • <b>Frameworks & Platforms:</b> ASP.NET MVC, ASP.NET Web API, .NET Framework, REST APIs<br>
+        • <b>Databases:</b> Microsoft SQL Server, MySQL — stored procedures, triggers, views, CTEs, window functions, query optimization, SSIS, SSRS<br>
+        • <b>AI / ML (learning):</b> RAG, LLMs, vector databases, semantic search<br>
+        • <b>Tools:</b> Visual Studio, SSMS, Git, Azure DevOps<br>
         `,
 
         projects: `
         <b>Featured Projects:</b><br><br>
-        • <b>Project Alpha</b> — Web application for real-time data visualizer.<br>
-          Tech: React, Node.js, WebSockets, PostgreSQL.<br><br>
-        • <b>Project Beta</b> — Automated continuous integration CLI tool.<br>
-          Tech: Python, Docker, GitHub Actions.<br><br>
-        • <b>Project Gamma</b> — E-commerce API gateway with payment integrations.<br>
-          Tech: Express.js, Redis, MongoDB, Stripe API.<br>
+        • <b>AI-Powered SQL Support Assistant</b> — RAG system that ingests historical SQL scripts and resolution notes, embeds them, and semantically retrieves relevant fixes for new production issues, with an LLM synthesizing recommendations.<br>
+          Tech: Python, RAG, LLMs, Vector Search.<br><br>
+        • <b>Bank Loan Default Prediction</b> — Analyzed 100,000+ borrower records using SQL Server and Python to engineer risk features and uncover default patterns.<br>
+          Tech: SQL, Microsoft SQL Server, Python, Pandas, Scikit-learn.<br>
         `,
 
         hire: `
         <b>💼 Hire & Collaborate</b><br><br>
-        I am currently available for <b>full-time engineering roles</b> and <b>freelance contracts</b>:<br>
-        • Full-stack & backend application development<br>
-        • RESTful API integration & database engineering<br>
-        • Code reviews & performance optimization<br><br>
-        Get in touch → <a href="mailto:your.email@example.com?subject=Project%20Inquiry" class="custom-link">your.email@example.com</a>
+        I am currently <b>open to new opportunities</b>:<br>
+        • Backend & enterprise application development (.NET / SQL Server)<br>
+        • SQL performance tuning & database engineering<br>
+        • REST API design & integration<br><br>
+        Get in touch → <a href="mailto:prajeetsinghkalchuri@gmail.com?subject=Project%20Inquiry" class="custom-link">prajeetsinghkalchuri@gmail.com</a>
         `,
 
         faq: `
         <b>❓ FAQ</b><br><br>
         <b>What is your main specialization?</b><br>
-        Full-stack web applications with an emphasis on robust backend backbones.<br><br>
-        <b>Are you available for freelance projects?</b><br>
+        Enterprise backend development on ASP.NET MVC and SQL Server, with growing focus on AI/ML applications.<br><br>
+        <b>Are you open to new roles?</b><br>
         Yes, reach out via the email linked in the <b>contact</b> command.<br>
         `,
 
         contact: `
         <b>Contact Channels:</b><br>
-        • Email: <a href="mailto:your.email@example.com" class="custom-link">your.email@example.com</a><br>
-        • GitHub: <a href="https://github.com/yourusername" target="_blank" class="custom-link">github.com/yourusername</a><br>
-        • LinkedIn: <a href="https://linkedin.com/in/yourusername" target="_blank" class="custom-link">linkedin.com/in/yourusername</a><br>
+        • Email: <a href="mailto:prajeetsinghkalchuri@gmail.com" class="custom-link">prajeetsinghkalchuri@gmail.com</a><br>
+        • GitHub: <a href="https://github.com/prajeetkalchuri" target="_blank" class="custom-link">github.com/prajeetkalchuri</a><br>
+        • LinkedIn: <a href="https://linkedin.com/in/prajeetsinghkalchuri" target="_blank" class="custom-link">linkedin.com/in/prajeetsinghkalchuri</a><br>
         `,
 
         github: () => {
-            window.open("https://github.com/yourusername", "_blank");
-            return `Opening <a href="https://github.com/yourusername" target="_blank" class="custom-link">GitHub Profile</a>...`;
+            window.open("https://github.com/prajeetkalchuri", "_blank");
+            return `Opening <a href="https://github.com/prajeetkalchuri" target="_blank" class="custom-link">GitHub Profile</a>...`;
         },
 
         linkedin: () => {
-            window.open("https://linkedin.com/in/yourusername", "_blank");
-            return `Opening <a href="https://linkedin.com/in/yourusername" target="_blank" class="custom-link">LinkedIn Profile</a>...`;
+            window.open("https://linkedin.com/in/prajeetsinghkalchuri", "_blank");
+            return `Opening <a href="https://linkedin.com/in/prajeetsinghkalchuri" target="_blank" class="custom-link">LinkedIn Profile</a>...`;
         },
 
         resume: () => {
