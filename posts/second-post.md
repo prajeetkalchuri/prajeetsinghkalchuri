@@ -1,7 +1,7 @@
 ---
-title: Building an Agentic AI Terminal Portfolio
-date: March 2026
-summary: How I integrated Gemini function calling with a static web terminal interface.
+title: test blog2
+date: July 2026
+summary: testing the dynamic rendering 
 ---
 
 # Building an Agentic AI Terminal Portfolio
