@@ -287,34 +287,64 @@ document.addEventListener("DOMContentLoaded", function () {
     // ==========================================
     // 📰 MAIN PAGE BLOG SECTION RENDERER LOGIC
     // ==========================================
+// Dynamic Blog Post Auto-Discovery via GitHub API
+    window.renderBlogList = async function () {
+        const listContainer = document.getElementById('blog-list');
+        if (!listContainer) return;
 
-    const BLOG_POSTS = [
-      {
-        slug: "rag-ai-agent", // Points to posts/rag-ai-agent.md in GitHub
-        title: "Building an Agentic AI Terminal Portfolio",
-        date: "March 2026",
-        summary: "How I integrated Gemini function calling with a static web terminal interface."
-      }
-      // Add future articles here!
-    ];
+        listContainer.innerHTML = "<p style='color:#8b949e;'>Fetching latest articles from GitHub...</p>";
 
-    window.renderBlogList = function() {
-      const listContainer = document.getElementById('blog-list');
-      if (!listContainer) return;
+        const username = "prajeetkalchuri";
+        const repo = "prajeetsinghkalchuri";
 
-      if (!BLOG_POSTS.length) {
-        listContainer.innerHTML = "<p>No articles published yet.</p>";
-        return;
-      }
+        try {
+            // 1. Ask GitHub API for all files in the /posts folder
+            const response = await fetch(`https://api.github.com/repos/${username}/${repo}/contents/posts`);
+            if (!response.ok) throw new Error("Could not fetch posts directory");
 
-      listContainer.innerHTML = BLOG_POSTS.map(post => `
-        <div class="post-card" onclick="openPost('${post.slug}')" style="padding: 1rem 0; border-bottom: 1px solid #21262d; cursor: pointer;">
-          <div class="post-title" style="font-size: 1.2rem; color: #00ff9d; font-weight: bold;">${post.title}</div>
-          <div class="post-meta" style="font-size: 0.85rem; color: #8b949e; margin-top: 0.3rem;">${post.date} • Click to read</div>
-          <p style="margin: 0.4rem 0 0 0; font-size: 0.95rem; opacity: 0.8; color: #c9d1d9;">${post.summary}</p>
-        </div>
-      `).join('');
+            const files = await response.json();
+
+            // Filter only .md files
+            const mdFiles = files.filter(file => file.name.endsWith('.md'));
+
+            if (mdFiles.length === 0) {
+                listContainer.innerHTML = "<p>No articles found in posts/ folder.</p>";
+                return;
+            }
+
+            // 2. Fetch each .md file to extract its Frontmatter title/date/summary
+            const postsData = await Promise.all(mdFiles.map(async (file) => {
+                const slug = file.name.replace('.md', '');
+                const rawRes = await fetch(file.download_url);
+                const text = await rawRes.text();
+
+                // Extract Frontmatter metadata between --- lines
+                const titleMatch = text.match(/title:\s*(.*)/i);
+                const dateMatch = text.match(/date:\s*(.*)/i);
+                const summaryMatch = text.match(/summary:\s*(.*)/i);
+
+                return {
+                    slug: slug,
+                    title: titleMatch ? titleMatch[1].trim() : slug.replace(/-/g, ' '),
+                    date: dateMatch ? dateMatch[1].trim() : 'Recent',
+                    summary: summaryMatch ? summaryMatch[1].trim() : ''
+                };
+            }));
+
+            // 3. Render posts list dynamically
+            listContainer.innerHTML = postsData.map(post => `
+      <div class="post-card" onclick="openPost('${post.slug}')" style="padding: 1rem 0; border-bottom: 1px solid #21262d; cursor: pointer;">
+        <div class="post-title" style="font-size: 1.2rem; color: #00ff9d; font-weight: bold;">${post.title}</div>
+        <div class="post-meta" style="font-size: 0.85rem; color: #8b949e; margin-top: 0.3rem;">${post.date} • Click to read</div>
+        <p style="margin: 0.4rem 0 0 0; font-size: 0.95rem; opacity: 0.8; color: #c9d1d9;">${post.summary}</p>
+      </div>
+    `).join('');
+
+        } catch (err) {
+            listContainer.innerHTML = "<p style='color: #f0883e;'>Unable to load articles automatically.</p>";
+        }
     };
+
 
     window.openPost = async function(slug) {
       const listContainer = document.getElementById('blog-list');
