@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <b>experience</b> - Professional background & tenure<br>
     <b>skills</b>     - Technical stack & capabilities<br>
     <b>projects</b>   - Featured software projects<br>
+    <b>blog or blogs</b> - Read tech articles & engineering notes<br>
     <b>hire</b>       - Freelance & job availability<br>
     <b>faq</b>        - Frequently asked questions<br>
     <br>
@@ -43,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <b>resume or r</b>     - Download PDF resume<br>
     `;
 
+    
     const commands = {
         help: helpMessage,
 
@@ -58,6 +60,17 @@ document.addEventListener("DOMContentLoaded", function () {
         <span class="blue">/___\\    /___\\</span>  LinkedIn: <a href="https://linkedin.com/in/prajeetsinghkalchuri" target="_blank" class="custom-link">linkedin.com/in/prajeetsinghkalchuri</a>
         </pre>`;
         },
+
+        blogs: () => {
+            const blogSection = document.getElementById('blog-section');
+            if (blogSection) {
+                blogSection.scrollIntoView({ behavior: 'smooth' });
+                return "Scrolling down to recent tech articles... 👇";
+            }
+            return `👉 <a href="blog.html" target="_self" style="color: #00ff9d;">Click here to open the standalone Blog Reader</a>`;
+        },
+
+       // blogs: () => commands.blog(), bug showing duplicate
 
         whoami: `<b>Prajeet Singh</b> — Advanced Application Engineering Senior Analyst at Accenture, working on enterprise Supply Chain Management applications. Passionate about backend engineering, SQL optimization, and applying AI/ML (RAG, LLMs) to real production workflows.`,
 
@@ -270,4 +283,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
     printWelcome();
     createCommandBar();
+
+    // ==========================================
+    // 📰 MAIN PAGE BLOG SECTION RENDERER LOGIC
+    // ==========================================
+
+    const BLOG_POSTS = [
+      {
+        slug: "rag-ai-agent", // Points to posts/rag-ai-agent.md in GitHub
+        title: "Building an Agentic AI Terminal Portfolio",
+        date: "March 2026",
+        summary: "How I integrated Gemini function calling with a static web terminal interface."
+      }
+      // Add future articles here!
+    ];
+
+    window.renderBlogList = function() {
+      const listContainer = document.getElementById('blog-list');
+      if (!listContainer) return;
+
+      if (!BLOG_POSTS.length) {
+        listContainer.innerHTML = "<p>No articles published yet.</p>";
+        return;
+      }
+
+      listContainer.innerHTML = BLOG_POSTS.map(post => `
+        <div class="post-card" onclick="openPost('${post.slug}')" style="padding: 1rem 0; border-bottom: 1px solid #21262d; cursor: pointer;">
+          <div class="post-title" style="font-size: 1.2rem; color: #00ff9d; font-weight: bold;">${post.title}</div>
+          <div class="post-meta" style="font-size: 0.85rem; color: #8b949e; margin-top: 0.3rem;">${post.date} • Click to read</div>
+          <p style="margin: 0.4rem 0 0 0; font-size: 0.95rem; opacity: 0.8; color: #c9d1d9;">${post.summary}</p>
+        </div>
+      `).join('');
+    };
+
+    window.openPost = async function(slug) {
+      const listContainer = document.getElementById('blog-list');
+      const contentContainer = document.getElementById('blog-content');
+
+      try {
+        const response = await fetch(`posts/${slug}.md`);
+        if (!response.ok) throw new Error("Article file not found");
+        
+        const markdown = await response.text();
+
+        listContainer.style.display = 'none';
+        contentContainer.style.display = 'block';
+        
+        contentContainer.innerHTML = `
+          <button onclick="closePost()" style="background: #21262d; color: #58a6ff; border: 1px solid #30363d; padding: 0.4rem 0.8rem; border-radius: 4px; cursor: pointer; margin-bottom: 1rem;">← Back to all articles</button>
+          <div class="markdown-body">${marked.parse(markdown)}</div>
+        `;
+        
+        document.getElementById('blog-section').scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        alert("Unable to load article. Make sure posts/" + slug + ".md exists in your GitHub repository.");
+      }
+    };
+
+    window.closePost = function() {
+      document.getElementById('blog-list').style.display = 'block';
+      document.getElementById('blog-content').style.display = 'none';
+    };
+
+    renderBlogList();
 });

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prajeet Singh | Blog</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --text: #c9d1d9;
+      --accent: #58a6ff;
+      --border: #30363d;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-weight: 500; }
+    hr { border: 0; border-top: 1px solid var(--border); margin: 2rem 0; }
+    code { background: var(--card-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: monospace; }
+    pre { background: var(--card-bg); padding: 1rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border); }
+    blockquote { border-left: 4px solid var(--accent); margin: 0; padding-left: 1rem; color: #8b949e; }
+  </style>
+</head>
+<body>
+
+  <a href="index.html" class="back-link">← Back to Terminal</a>
+
+  <div id="content">
+    <p>Loading article...</p>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const postSlug = urlParams.get('post');
+
+    const contentDiv = document.getElementById('content');
+
+    if (!postSlug) {
+      contentDiv.innerHTML = `
+        <h1>Articles & Engineering Notes</h1>
+        <p>Thoughts on Agentic AI, DevOps, and Full-Stack Systems.</p>
+        <hr>
+        <ul>
+          <li><a href="blog.html?post=rag-ai-agent"><b>Building an Agentic AI Terminal Portfolio</b></a></li>
+        </ul>
+      `;
+    } else {
+      fetch(`posts/${postSlug}.md`)
+        .then(response => {
+          if (!response.ok) throw new Error("Article not found");
+          return response.text();
+        })
+        .then(markdown => {
+          contentDiv.innerHTML = marked.parse(markdown);
+        })
+        .catch(err => {
+          contentDiv.innerHTML = `
+            <h2>404 - Article Not Found</h2>
+            <p>The requested blog post doesn't exist.</p>
+            <a href="blog.html">View all articles</a>
+          `;
+        });
+    }
+  </script>
+</body>
+</html>
